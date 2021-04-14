@@ -12,6 +12,7 @@ def selenideVersion = "5.19.0",
     junitVersion = "5.7.1",
     javafakerVersion = "1.0.2",
     aspectjVersion = "1.9.6",
+    ownerVersion = "1.0.12",
     allureVersion = "2.13.8"
 
 allure {
@@ -30,6 +31,7 @@ dependencies {
             "com.github.javafaker:javafaker:$javafakerVersion",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "org.aspectj:aspectjweaver:$aspectjVersion",
+            "org.aeonbits.owner:owner:$ownerVersion",
             "io.qameta.allure:allure-selenide:$allureVersion")
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
@@ -38,6 +40,16 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
 }
 
 test {
