@@ -3,6 +3,7 @@ package scenarios;
 import com.codeborne.selenide.Configuration;
 import config.WebDriverConfig;
 import io.qameta.allure.selenide.AllureSelenide;
+import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,6 +13,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static utils.Attachments.*;
 
+@Slf4j
 public class TestBase {
     private
 
@@ -44,5 +46,6 @@ public class TestBase {
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
         Configuration.remote = String.format(remoteUrl, login, password);
+        log.info("PARAMETERS: " + remoteUrl + " " + login + " " +  password);
     }
 }
