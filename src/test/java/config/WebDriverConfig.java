@@ -8,12 +8,8 @@ public interface WebDriverConfig extends Config {
     @DefaultValue("chrome")
     String browser();
 
-    @Key("remote")
-    @DefaultValue("false")
-    boolean isRemote();
-
-    @Key("selenoid.domain")
-    String selenoidDomain();
+    @Key("remoteUrl")
+    String remoteUrl();
 
     @Key("login")
     String login();

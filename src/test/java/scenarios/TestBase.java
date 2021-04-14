@@ -13,17 +13,18 @@ import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
 import static utils.Attachments.*;
 
 public class TestBase {
-    private static final WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class);
+    private
 
     @BeforeAll
     static void setup() {
+        final WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class);
 
         addListener("AllureSelenide", new AllureSelenide());
 
         Configuration.startMaximized = true;
         Configuration.browser = config.browser();
-        if (config.isRemote()) {
-            setupRemoteTestExecution();
+        if (config.remoteUrl() != null) {
+            setupRemoteTestExecution(config.remoteUrl(), config.login(), config.password());
         }
     }
 
@@ -36,11 +37,11 @@ public class TestBase {
         closeWebDriver();
     }
 
-    private static void setupRemoteTestExecution() {
+    private static void setupRemoteTestExecution(String remoteUrl, String login, String password) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = String.format("https://%s:%s@%s/wd/hub/", config.login(), config.password(), config.selenoidDomain());
+        Configuration.remote = String.format(remoteUrl, login, password);
     }
 }
