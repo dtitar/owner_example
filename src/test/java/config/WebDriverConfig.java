@@ -2,7 +2,8 @@ package config;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources({"classpath:credentials.properties"})
+@Config.LoadPolicy(Config.LoadType.MERGE)
+@Config.Sources({"classpath:credentials.properties",  "system:properties"})
 public interface WebDriverConfig extends Config {
 
     @Key("browser")
