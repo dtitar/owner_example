@@ -21,12 +21,9 @@ public class TestBase {
         final WebDriverConfig config = ConfigFactory.create(WebDriverConfig.class);
 
         addListener("AllureSelenide", new AllureSelenide());
-
         Configuration.startMaximized = true;
-//        Configuration.browser = config.browser();
-        Configuration.browser = System.getProperty("browser");
-//        if (config.remoteUrl() != null) {
-        if (System.getProperty("remoteUrl()") != null) {
+        Configuration.browser = config.browser();
+        if (config.remoteUrl() != null) {
             setupRemoteTestExecution(config.remoteUrl(), config.login(), config.password());
         }
     }
