@@ -15,7 +15,6 @@ import static utils.Attachments.*;
 
 @Slf4j
 public class TestBase {
-    private
 
     @BeforeAll
     static void setup() {
