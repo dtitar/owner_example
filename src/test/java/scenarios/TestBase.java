@@ -23,9 +23,10 @@ public class TestBase {
         addListener("AllureSelenide", new AllureSelenide());
 
         Configuration.startMaximized = true;
-        Configuration.browser = config.browser();
-        log.info("CONFIG: " + config.remoteUrl() + " " + config.login() + " " + config.password() + " " + config.browser());
-        if (config.remoteUrl() != null) {
+//        Configuration.browser = config.browser();
+        Configuration.browser = System.getProperty("browser");
+//        if (config.remoteUrl() != null) {
+        if (System.getProperty("remoteUrl()") != null) {
             setupRemoteTestExecution(config.remoteUrl(), config.login(), config.password());
         }
     }
@@ -46,6 +47,5 @@ public class TestBase {
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
         Configuration.remote = String.format(remoteUrl, login, password);
-        log.info("PARAMETERS: " + remoteUrl + " " + login + " " + password);
     }
 }
