@@ -8,7 +8,7 @@ repositories {
     mavenCentral()
 }
 
-def selenideVersion = "5.19.0",
+def selenideVersion = "5.20.1",
     junitVersion = "5.7.1",
     javafakerVersion = "1.0.2",
     aspectjVersion = "1.9.6",
@@ -44,12 +44,6 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(Test) {
     systemProperties(System.getProperties())
-    testLogging {
-        lifecycle {
-            events "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
-        }
-    }
 }
 
 test {
